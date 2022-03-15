@@ -1,8 +1,16 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const router = useRouter()
+
+  const navigateToUser = () => {
+    router.push('/user')
+    // router.replace('/user') will replace last item on navigation stack
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,6 +22,7 @@ export default function Home() {
       <main className={styles.main}>
         <Link href={`/user/${2}`}>User Link</Link>
         <Link href="/blog/2022/12/test-blog">Blog Link</Link>
+        <button onClick={navigateToUser}>Navigate to user page</button>
       </main>
     </div>
   )
