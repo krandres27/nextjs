@@ -8,6 +8,7 @@ const EventSearch = ({ onSearch }) => {
     'Feb',
     'Mar',
     'Apr',
+    'May',
     'Jun',
     'Jul',
     'Aug',

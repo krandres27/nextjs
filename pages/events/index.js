@@ -8,7 +8,6 @@ const Events = () => {
   const events = getAllEvents()
 
   const searchHandler = (year, month) => {
-    console.log(year, 'aaa')
     router.push(`/events/${year}/${month}`)
   }
   
