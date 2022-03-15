@@ -1,5 +1,11 @@
+import { getAllEvents } from '../../feed'
+import { EventList } from '../../components/events'
+
 const Events = () => {
-  return <p>Events view</p>
+  const events = getAllEvents()
+  return <div>
+    <EventList events={events} />
+  </div>
 }
 
 export default Events

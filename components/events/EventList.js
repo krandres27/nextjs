@@ -3,11 +3,11 @@ import classes from './EventList.module.css'
 
 const EventList = ({ events }) => {
   return (
-    events.map(event => (
-      <ul className={classes.list} key={event.id}>
-        <EventItem event={event} />
-      </ul>
-    ))
+    <ul className={classes.list}>
+      {events.map(event => (
+          <EventItem event={event} key={event.id}/>
+      ))}
+    </ul>
   )
 }
 
