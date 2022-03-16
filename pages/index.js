@@ -19,5 +19,8 @@ export default function Home(props) {
 export async function getStaticProps() {
   const filepath = path.join(process.cwd(), "data", "dummy-be.json");
   const jsonData = await fs.readFile(filepath);
-  return { props: { products: JSON.parse(jsonData).products } };
+  // revalidate will make the page to be regenerated only if the value in seconds
+  // has ended, on dev mode it will re-generate on every call but for prod envs it
+  // will wait the revalidate value (seconds)
+  return { props: { products: JSON.parse(jsonData).products, revalidate: 60 } };
 }
