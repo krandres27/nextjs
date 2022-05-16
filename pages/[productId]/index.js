@@ -26,9 +26,14 @@ async function getData() {
 export async function getStaticProps(context) {
   const jsonData = await getData();
   const { params } = context;
+  const product = jsonData.products.find(product => product.id === params.productId);
+
+  if (!product) {
+    return { notFound: true }
+  }
 
   return {
-    props: { product: jsonData.products.find(product => product.id === params.productId) }
+    props: { product }
   }
 }
 
