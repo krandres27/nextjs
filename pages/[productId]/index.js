@@ -18,22 +18,28 @@ function ProductDetailPage({ product }) {
   );
 }
 
-export async function getStaticProps(context) {
-  const { params } = context;
+async function getData() {
   const filepath = path.join(process.cwd(), "data", "dummy-be.json");
-  const jsonData = await fs.readFile(filepath);
+  return JSON.parse(await fs.readFile(filepath));
+}
+
+export async function getStaticProps(context) {
+  const jsonData = await getData();
+  const { params } = context;
+
   return {
-    props: { product: JSON.parse(jsonData).products.find(product => product.id === params.productId) }
+    props: { product: jsonData.products.find(product => product.id === params.productId) }
   }
 }
 
 // The goal of this function is to tell next which instances
 // of this dynamic page should be generated
 export async function getStaticPaths() {
+  const jsonData = await getData();
+  const pathsWithParams = jsonData.products.map(product => ({ params: { productId: product.id } }));
+  
   return {
-    paths: [
-      { params: { productId: 'p1'} },
-    ],
+    paths: pathsWithParams,
     fallback: true,
   }
 }
